@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 import { Input, Button } from "react-native-elements";
+import Logo from "/Users/rohitnair/PlantPals/assets/Logo_1.svg";
+import SvgUri from "react-native-svg-uri";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -8,16 +10,13 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require("./path-to-your-logo.png")} // Make sure to place your logo in the appropriate directory and update this path
-        style={styles.logo}
-      />
+      <Image source={Logo} />
       <Text style={styles.title}>PlantPals 🌱</Text>
       <Input
         placeholder="Username"
         value={username}
         onChangeText={setUsername}
-        autoCapitalize="none"
+        autoCapitalirze="none"
         containerStyle={styles.input}
       />
       <Input
@@ -47,36 +46,37 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#F9FAF9", // This sets the background color to a light shade similar to the image
+    backgroundColor: "#F9FAF9",
   },
   logo: {
     width: 150,
     height: 150,
-    marginTop: 60, // Adjusted to give space from the top of the screen
-    marginBottom: 32, // Space above the title
+    marginTop: 60,
+    marginBottom: 32,
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 48, // Space above the input fields
+    marginBottom: 48,
   },
   input: {
     width: "100%",
-    marginBottom: 16, // Space between input fields
+    marginBottom: 16,
   },
   forgotPassword: {
     alignSelf: "flex-end",
-    marginVertical: 12, // Space above the login button
-    color: "#6B7280", // This is a medium gray color for the text
+    marginVertical: 12,
+    color: "#6B7280",
   },
   loginButton: {
-    backgroundColor: "#10B981", // A shade of green for the button
-    borderRadius: 10,
+    backgroundColor: "#19B381",
+    borderRadius: 25,
     paddingVertical: 10,
+    paddingHorizontal: 25,
   },
   signUpText: {
-    marginTop: 24, // Space above the sign up prompt
-    color: "#6B7280", // Same as the forgot password link
+    marginTop: 24,
+    color: "#6B7280",
   },
 });
 
