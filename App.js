@@ -2,11 +2,14 @@ import { brown } from '@mui/material/colors';
 import { fontWeight, width } from '@mui/system';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+
+import Nav from './components/Nav';
 import MapPage from './pages/MapPage';
+import Dashboard from './pages/Dashboard';
+import Leaderboard from './pages/Leaderboard';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Nav from './components/Nav';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,13 +17,15 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName='Nav'
+        initialRouteName='Dashboard'
         screenOptions={{
           headerShown: false,
         }}
+        tabBar={props => <Nav {...props}/>}
       >
-        <Tab.Screen name="Nav" component={Nav} />
-        <Tab.Screen name="Home" component={MapPage} />
+        <Tab.Screen name="Dashboard" component={Dashboard} />
+        <Tab.Screen name="Map" component={MapPage} />
+        <Tab.Screen name="Leaderboard" component={Leaderboard} />
       </Tab.Navigator>
     </NavigationContainer>
   );
