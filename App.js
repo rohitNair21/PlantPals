@@ -1,7 +1,14 @@
 import { brown } from "@mui/material/colors";
 import { fontWeight, width } from "@mui/system";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  LogBox,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 import Nav from "./components/Nav";
 import SignUp from "./pages/Signup";
@@ -13,14 +20,21 @@ import Redemption from "./pages/Redemption";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useState } from "react";
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  if (!isLoggedIn) {
+    return <Login setLoggedIn={setLoggedIn} />;
+  }
+
+  LogBox.ignoreAllLogs();
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="Login"
+        initialRouteName="Dashboard"
         screenOptions={{
           headerShown: false,
         }}
@@ -29,7 +43,6 @@ export default function App() {
       >
         <Tab.Screen name="Login" component={Login} />
         <Tab.Screen name="Redemption" component={Redemption} />
-
         <Tab.Screen name="Signup" component={SignUp} />
         <Tab.Screen name="Dashboard" component={Dashboard} />
         <Tab.Screen name="Map" component={MapPage} />
