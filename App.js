@@ -13,14 +13,20 @@ import Redemption from "./pages/Redemption";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useState } from "react";
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [isLoggedIn, setLoggedIn] = useState(false);  
+  if(!isLoggedIn) {
+    return (<Login setLoggedIn={setLoggedIn} />)
+  }
+
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="Login"
+        initialRouteName="Dashboard"
         screenOptions={{
           headerShown: false,
         }}
