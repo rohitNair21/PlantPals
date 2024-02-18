@@ -11,6 +11,7 @@ import { Input, Button } from "react-native-elements";
 import Logo from "../assets/Logo_Final.png";
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import leafImage from "../assets/Leaf2Final.png";
 
 import {
   getFirestore,
@@ -99,6 +100,14 @@ const Login = ({ navigation }) => {
           <Text style={styles.signUpText}>Don’t have an account? Sign up</Text>
         </TouchableOpacity>
       </View>
+      <Image
+        source={leafImage}
+        style={[styles.leafImage, styles.leafImageLeft]}
+      />
+      <Image
+        source={leafImage}
+        style={[styles.leafImage, styles.leafImageRight]}
+      />
     </View>
   );
 };
@@ -124,6 +133,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   loginBox: {
+    zIndex: 1,
     width: "90%",
     alignItems: "center",
     backgroundColor: "#E1F0C8",
@@ -151,13 +161,13 @@ const styles = StyleSheet.create({
     alignSelf: "start",
   },
   inputContainer: {
-    borderBottomWidth: 0, // Remove bottom border
-    backgroundColor: "#eee", // Light grey background
-    borderRadius: 10, // Rounded corners
-    marginBottom: 16, // Margin between input fields
+    borderBottomWidth: 0,
+    backgroundColor: "#eee",
+    borderRadius: 10,
+    marginBottom: 16,
   },
   inputContainerStyle: {
-    paddingHorizontal: 0, // No additional horizontal padding
+    paddingHorizontal: 0,
   },
   forgotPassword: {
     marginBottom: 12,
@@ -168,15 +178,32 @@ const styles = StyleSheet.create({
     alignSelf: "start",
   },
   loginButton: {
-    backgroundColor: "#1E8523", // A green shade for the login button
+    zIndex: 1,
+    backgroundColor: "#1E8523",
     borderRadius: 25,
     paddingVertical: 12,
-    width: "100%", // Full width button
-    marginTop: 10, // Space above the button
+    width: "100%",
+    marginTop: 10,
   },
   signUpText: {
     marginTop: 24,
     color: "#6B7280",
+  },
+  leafImage: {
+    position: "absolute",
+    width: 200,
+    height: 200,
+    resizeMode: "contain",
+  },
+  leafImageLeft: {
+    bottom: -15,
+    right: -55,
+    transform: [{ rotate: "-45deg" }],
+  },
+  leafImageRight: {
+    top: 250,
+    left: -50,
+    transform: [{ rotate: "45deg" }],
   },
 });
 

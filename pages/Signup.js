@@ -11,6 +11,7 @@ import { Input, Button } from "react-native-elements";
 import Logo from "../assets/Logo_Final.png";
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import leafImage from "../assets/Leaf2Final.png";
 
 import {
   getFirestore,
@@ -107,6 +108,14 @@ const Signup = ({ navigation }) => {
           onPress={handleSignUp}
         />
       </View>
+      <Image
+        source={leafImage}
+        style={[styles.leafImage, styles.leafImageLeft]}
+      />
+      <Image
+        source={leafImage}
+        style={[styles.leafImage, styles.leafImageRight]}
+      />
     </View>
   );
 };
@@ -132,6 +141,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   loginBox: {
+    zIndex: 1,
     width: "90%",
     alignItems: "center",
     backgroundColor: "#E1F0C8",
@@ -176,15 +186,31 @@ const styles = StyleSheet.create({
     alignSelf: "start",
   },
   loginButton: {
-    backgroundColor: "#1E8523", // A green shade for the login button
+    backgroundColor: "#1E8523",
     borderRadius: 25,
     paddingVertical: 12,
-    width: "100%", // Full width button
-    marginTop: 10, // Space above the button
+    width: "100%",
+    marginTop: 10,
   },
   signUpText: {
     marginTop: 24,
     color: "#6B7280",
+  },
+  leafImage: {
+    position: "absolute",
+    width: 200,
+    height: 200,
+    resizeMode: "contain",
+  },
+  leafImageLeft: {
+    bottom: -15,
+    right: -55,
+    transform: [{ rotate: "-45deg" }],
+  },
+  leafImageRight: {
+    top: 250,
+    left: -50,
+    transform: [{ rotate: "45deg" }],
   },
 });
 
