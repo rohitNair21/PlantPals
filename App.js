@@ -1,7 +1,14 @@
 import { brown } from "@mui/material/colors";
 import { fontWeight, width } from "@mui/system";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  LogBox,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 import Nav from "./components/Nav";
 import SignUp from "./pages/Signup";
@@ -17,6 +24,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  LogBox.ignoreAllLogs();
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -29,7 +37,6 @@ export default function App() {
       >
         <Tab.Screen name="Login" component={Login} />
         <Tab.Screen name="Redemption" component={Redemption} />
-
         <Tab.Screen name="Signup" component={SignUp} />
         <Tab.Screen name="Dashboard" component={Dashboard} />
         <Tab.Screen name="Map" component={MapPage} />
