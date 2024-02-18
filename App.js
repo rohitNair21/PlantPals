@@ -1,18 +1,14 @@
+import { brown } from '@mui/material/colors';
+import { fontWeight, width } from '@mui/system';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import MapView from 'react-native-maps';
-import {PROVIDER_GOOGLE} from 'react-native-maps';
-
-const calgary = {
-  latitude: 51.0478,
-  longitude: 114.0593
-}
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import MapPage from './Pages/MapPage';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <MapView initialRegion={calgary}  style={styles.map} provider={PROVIDER_GOOGLE}/>
-    </View>
+    <SafeAreaView style={{width:"100%", height:"100%"}}>
+      <MapPage/>
+    </SafeAreaView>
   );
 }
 
@@ -20,13 +16,11 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    margin: 25,
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  map: {
-    width: '100%',
-    height: '100%',
-  },
+  
 });
