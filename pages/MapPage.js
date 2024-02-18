@@ -98,8 +98,9 @@ export default function MapPage() {
             visible={modalVisible}
             animationType="slide"
         >
-            <SafeAreaView>
+            <SafeAreaView style={{flex:1}}>
                 <Text>Gay</Text>
+                <Text></Text>
                 <Pressable
                   style={{height:100, backgroundColor:"red", borderRadius:20, justifyContent:'center', alignItems:'center'}}
                   onPress={() => {setVisible(false)}}
