@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View, Modal } from 'react-native';
 import MapView, { Marker, Polygon } from 'react-native-maps';
 import {PROVIDER_GOOGLE} from 'react-native-maps';
+import { reverseGeocodeAsync } from 'expo-location';
 
 
 
@@ -16,14 +17,15 @@ const calgary = {
   longitudeDelta: 0.0421,
 }
 
-const Listing = ({name, index}) => {
+const Listing = ({name, address, index}) => {
   return (
     <View style={styles.ListingContainer}>
       <Pressable
+        style={{flex:1}}
         onPress={() => {setIndex(index); setVisible(true)}}
       >
         <Text style={{fontWeight:"bold"}}>{name}</Text>
-        <Text></Text>    
+        <Text>{address}</Text>    
       </Pressable>
     </View>
   )
@@ -45,16 +47,27 @@ export default function MapPage() {
                 const res = await fetch(query, {method:"GET", headers:{'X-App-Token':"btuIRgXPKkPuQmgec7uiwz8IJ"}});
                 const data = await res.json();
                 let arr = [];
-                data.map((g,index) => {
-                    arr[index] = {name:g.site_name, pos:{latitude: g.the_geom.coordinates[0][0][index][1], longitude: g.the_geom.coordinates[0][0][0][0]}}
-                })
+                
+                for(var i = 0; i < data.length; i++) {
+                  const g = data[i];
+                  const pos = {latitude: g.the_geom.coordinates[0][0][i][1], longitude: g.the_geom.coordinates[0][0][0][0]};
+                  const addr = await reverseGeocodeAsync(pos);
+                  arr[i] = {name:g.site_name, pos: pos,address: addr[0].name};
+                }
+                
+                
+                console.log(arr);
+          
                 setGardens(arr);
                 setLoading(false);
-                console.log(arr);
+            
             }
-            catch (e) {console.log("error")}
+            catch (e) {console.log(e)}
         }
+       
         fetchData();
+        
+        
         },[]
     );
 
@@ -63,7 +76,7 @@ export default function MapPage() {
             <ActivityIndicator/>
         </View>
     )
-
+   
     return (
     <SafeAreaView style={styles.container}>
         <View style={{width:"100%", height:"100%"}}>
@@ -77,17 +90,22 @@ export default function MapPage() {
             </MapView>
             
             <ScrollView style={styles.scrollContainer}>
-                {gardens.map((g, index) => <Listing name={g.name} key={index} />)}
+                {gardens.map((g, index) => <Listing name={g.name} address={g.address} key={index} />)}
         
             </ScrollView>
         </View>
         <Modal 
             visible={modalVisible}
             animationType="slide"
-    
         >
             <SafeAreaView>
                 <Text>Gay</Text>
+                <Pressable
+                  style={{height:100, backgroundColor:"red", borderRadius:20, justifyContent:'center', alignItems:'center'}}
+                  onPress={() => {setVisible(false)}}
+                >
+                  <Text>Close Modal</Text>
+                </Pressable>
             </SafeAreaView>
             
 
@@ -118,6 +136,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   ListingContainer: {
+    flex: 1,
     margin: 10,
     padding: 15,
     height: 140,
