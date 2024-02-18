@@ -101,7 +101,7 @@ export default function MapPage() {
     <SafeAreaView style={styles.container}>
         <View style={{width:"100%", height:"100%"}}>
             <View style={{padding:10}}>
-                <Text style={{fontWeight:"600", fontSize:25, color:"brown", marginBottom:10}}>Find gardens near you</Text>
+                <Text style={{fontWeight:"600", fontSize:25, color:"#57442A", marginBottom:10}}>Find gardens near you</Text>
                 <Text style={{fontSize:13, fontWeight:"bold"}}>Check which areas around you might need some help</Text>
             </View>
             
@@ -204,9 +204,12 @@ const styles = StyleSheet.create({
     padding: 15,
     height: 140,
     borderRadius: 25,
-    backgroundColor: "white",
-    borderWidth: 2,
-    borderColor: "brown",
+    backgroundColor: "#EDFAD8",
+    borderWidth: 0,
+    alignItems:'center',
+    justifyContent:'center',
+
+    borderColor: "#57442A",
 
 
   },
