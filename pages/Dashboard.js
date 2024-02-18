@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
+import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import {
   Appbar,
   Card,
@@ -23,7 +17,7 @@ import Logo from "../assets/Logo_Final.png";
 import Leaf1 from "../assets/Leaf1.png";
 import Leaf2 from "../assets/Leaf2.png";
 
-const Dashboard = () => {
+const Dashboard = ({ navigation }) => {
   let [fontsLoaded] = useFonts({
     Lexend_400Regular,
   });
@@ -83,8 +77,12 @@ const Dashboard = () => {
         </View>
       </View>
 
-      <Button style={styles.findmorebutton} mode="contained" onPress={() => {}}>
-        Find more gardens
+      <Button
+        style={styles.findmorebutton}
+        mode="contained"
+        onPress={() => navigation.navigate("Redemption")}
+      >
+        Redeem Points
       </Button>
       {/* <ImageBackground source={Leaf1} style={styles.leaf} resizeMode="cover"/> */}
     </ScrollView>
