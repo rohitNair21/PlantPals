@@ -1,4 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 export default function Nav({ state, descriptors, navigation }) {
     return(
@@ -37,9 +39,17 @@ export default function Nav({ state, descriptors, navigation }) {
                         onLongPress={onLongPress}
                         style={{ flex: 1 }}
                     >
-                        <Text style={{ color: isFocused ? '#673ab7' : '#222' }}>
-                        {label}
-                        </Text>
+                        <View style={{
+                            padding: 10,
+                            alignItems: "center",
+                        }}>
+                            {label === "Dashboard" && <MaterialIcons name="space-dashboard" size={24} color="black" />}
+                            {label === "Map" && <FontAwesome5 name="map-marker-alt" size={24} color="black" />}
+                            {label === "Leaderboard" && <MaterialIcons name="leaderboard" size={24} color="black" />}
+                            <Text style={{ color: isFocused ? '#673ab7' : '#222' }}>
+                            {label}
+                            </Text>
+                        </View>
                     </TouchableOpacity>
                 );
             })}
