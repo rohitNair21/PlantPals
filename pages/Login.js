@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
+import {
+  Alert,
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 import { Input, Button } from "react-native-elements";
 import Logo from "../assets/Logo_Final.png";
 import { initializeApp } from "firebase/app";
@@ -47,7 +54,7 @@ const Login = ({ navigation }) => {
       const errorMessage = error.message;
       console.log("Error code:", errorCode);
       console.log("Error message:", errorMessage);
-      // Show an error message to your user
+      Alert.alert(errorCode, errorMessage);
     }
   };
 

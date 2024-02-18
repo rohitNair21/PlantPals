@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
+import {
+  Alert,
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 import { Input, Button } from "react-native-elements";
 import Logo from "../assets/Logo_Final.png";
 import { initializeApp } from "firebase/app";
@@ -35,6 +42,8 @@ const Signup = ({ navigation }) => {
   const handleSignUp = async () => {
     if (password !== confirmPassword) {
       console.log("Passwords do not match.");
+      Alert.alert("Error", "Passwords do not match");
+
       return;
     }
 
@@ -49,6 +58,7 @@ const Signup = ({ navigation }) => {
       navigation.navigate("Login");
     } catch (error) {
       console.error("Sign up error:", error);
+      Alert.alert("Error", "Error signing in. Please try again.");
     }
   };
 
