@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     marginTop: 180,
     flex: 1,
     padding: 20,
-    backgroundColor: "#F9FAF9",
+    
   },
   pointsText: {
     fontSize: 20,
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     backgroundColor: "#EDFAD8",
     borderRadius: 8,
-    borderWidth: 1,
+    borderWidth: 0,
     borderColor: "#57442A",
     elevation: 4, // remove this line if you don't want shadow on Android
   },
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    backgroundColor: "#10B981",
+    backgroundColor: "#1E8523",
   },
 });
 
