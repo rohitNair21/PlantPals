@@ -14,8 +14,7 @@ import {
   Lexend_700Bold,
 } from "@expo-google-fonts/lexend";
 import Logo from "../assets/Logo_Final.png";
-import Leaf1 from "../assets/Leaf1.png";
-import Leaf2 from "../assets/Leaf2.png";
+import leafImage from "../assets/Leaf2Final.png";
 
 const Dashboard = ({ navigation }) => {
   let [fontsLoaded] = useFonts({
@@ -84,7 +83,14 @@ const Dashboard = ({ navigation }) => {
       >
         Redeem Points
       </Button>
-      {/* <ImageBackground source={Leaf1} style={styles.leaf} resizeMode="cover"/> */}
+      <Image
+        source={leafImage}
+        style={[styles.leafImage, styles.leafImageLeft]}
+      />
+      <Image
+        source={leafImage}
+        style={[styles.leafImage, styles.leafImageRight]}
+      />
     </ScrollView>
   );
 };
@@ -93,6 +99,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    marginTop: 30, // Add some top margin to create space between the logo and the text
   },
   maintitle: {
     fontWeight: "700",
@@ -122,14 +131,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
+
   logo: {
-    width: 70,
-    height: 70,
-    position: "fixed",
-    top: 0,
-    left: 0,
-    marginTop: 40,
-    marginLeft: 20,
+    width: 50,
+    height: 50,
+    marginTop: -10, // Add some top margin to create space between the logo and the text
   },
   name: {
     fontWeight: "bold",
@@ -140,6 +146,7 @@ const styles = StyleSheet.create({
     fontFamily: "Lexend_400Regular",
   },
   activitySection: {
+    zIndex: 1,
     padding: 20,
     backgroundColor: "#FFF",
     width: "90%",
@@ -164,6 +171,22 @@ const styles = StyleSheet.create({
     width: "50%",
     marginTop: 20,
     alignSelf: "center",
+  },
+  leafImage: {
+    position: "absolute",
+    width: 200,
+    height: 200,
+    resizeMode: "contain",
+  },
+  leafImageLeft: {
+    bottom: -15,
+    right: -55,
+    transform: [{ rotate: "-45deg" }],
+  },
+  leafImageRight: {
+    top: 250,
+    left: -50,
+    transform: [{ rotate: "45deg" }],
   },
 });
 
