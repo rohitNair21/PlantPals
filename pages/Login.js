@@ -3,6 +3,8 @@ import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import { Input, Button } from "react-native-elements";
 import Logo from "../assets/Logo_Final.png";
 import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 import {
   getFirestore,
   collection,
@@ -24,9 +26,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const auth = getAuth();
 
   const handleLogin = async () => {
     try {
@@ -37,6 +40,7 @@ const Login = () => {
       );
       const user = userCredential.user;
       console.log("User logged in:", user.uid);
+      navigation.navigate("Dashboard");
     } catch (error) {
       // Handle Errors here.
       const errorCode = error.code;
@@ -84,7 +88,7 @@ const Login = () => {
           buttonStyle={styles.loginButton}
           onPress={handleLogin}
         />
-        <TouchableOpacity onPress={() => console.log("Sign Up pressed")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
           <Text style={styles.signUpText}>Don’t have an account? Sign up</Text>
         </TouchableOpacity>
       </View>

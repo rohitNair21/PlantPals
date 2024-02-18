@@ -4,6 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import Nav from "./components/Nav";
+import SignUp from "./pages/Signup";
 import Login from "./pages/Login";
 import MapPage from "./pages/MapPage";
 import Dashboard from "./pages/Dashboard";
@@ -26,6 +27,7 @@ export default function App() {
         tabBar={(props) => <Nav {...props} />}
       >
         <Tab.Screen name="Login" component={Login} />
+        <Tab.Screen name="Signup" component={SignUp} />
         <Tab.Screen name="Dashboard" component={Dashboard} />
         <Tab.Screen name="Map" component={MapPage} />
         <Tab.Screen name="Leaderboard" component={Leaderboard} />

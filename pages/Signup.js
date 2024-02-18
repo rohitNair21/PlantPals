@@ -3,6 +3,8 @@ import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import { Input, Button } from "react-native-elements";
 import Logo from "../assets/Logo_Final.png";
 import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 import {
   getFirestore,
   collection,
@@ -23,27 +25,30 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
+const auth = getAuth(app);
 
-const Signup = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+const Signup = ({ navigation }) => {
+  const [email, setEmail] = useState(""); // State for email
+  const [password, setPassword] = useState(""); // State for password
+  const [confirmPassword, setConfirmPassword] = useState(""); // State for password confirmation
 
   const handleSignUp = async () => {
+    if (password !== confirmPassword) {
+      console.log("Passwords do not match.");
+      return;
+    }
+
     try {
-      const userCredential = await signInWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
-        username,
+        email,
         password
       );
       const user = userCredential.user;
-      console.log("User logged in:", user.uid);
+      console.log("User signed up:", user.uid);
+      navigation.navigate("Login");
     } catch (error) {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log("Error code:", errorCode);
-      console.log("Error message:", errorMessage);
-      // Show an error message to your user
+      console.error("Sign up error:", error);
     }
   };
 
@@ -55,20 +60,9 @@ const Signup = () => {
         <Text style={styles.title}>Sign Up</Text>
         <Text style={styles.header}>Email</Text>
         <Input
-          style={styles.input}
-          value={username}
-          onChangeText={setUsername}
-          autoCapitalize="none"
-          inputContainerStyle={styles.inputContainer}
-          inputStyle={styles.input}
-          containerStyle={styles.inputContainerStyle}
-        />
-
-        <Text style={styles.header}>Username</Text>
-        <Input
-          style={styles.input}
-          value={username}
-          onChangeText={setUsername}
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
           autoCapitalize="none"
           inputContainerStyle={styles.inputContainer}
           inputStyle={styles.input}
@@ -77,9 +71,20 @@ const Signup = () => {
 
         <Text style={styles.header}>Password</Text>
         <Input
-          style={styles.input}
+          placeholder="Password"
           value={password}
           onChangeText={setPassword}
+          secureTextEntry
+          inputContainerStyle={styles.inputContainer}
+          inputStyle={styles.input}
+          containerStyle={styles.inputContainerStyle}
+        />
+
+        <Text style={styles.header}>Password Confirmation</Text>
+        <Input
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
           secureTextEntry
           inputContainerStyle={styles.inputContainer}
           inputStyle={styles.input}
@@ -91,9 +96,6 @@ const Signup = () => {
           buttonStyle={styles.loginButton}
           onPress={handleSignUp}
         />
-        <TouchableOpacity onPress={() => console.log("Sign Up pressed")}>
-          <Text style={styles.signUpText}>Don’t have an account? Sign up</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
