@@ -1,9 +1,13 @@
+
 import { brown } from '@mui/material/colors';
 import { fontWeight } from '@mui/system';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
-import MapView from 'react-native-maps';
+import { useEffect, useState } from 'react';
+import { ActivityIndicator, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View, Modal } from 'react-native';
+import MapView, { Marker, Polygon } from 'react-native-maps';
 import {PROVIDER_GOOGLE} from 'react-native-maps';
+
+
 
 const calgary = {
   latitude: 51.0478,
@@ -12,11 +16,15 @@ const calgary = {
   longitudeDelta: 0.0421,
 }
 
-const Listing = ({name, address}) => {
+const Listing = ({name, index}) => {
   return (
     <View style={styles.ListingContainer}>
-      <Text style={{fontWeight:"bold"}}>{name}</Text>
-      <Text>{address}</Text>    
+      <Pressable
+        onPress={() => {setIndex(index); setVisible(true)}}
+      >
+        <Text style={{fontWeight:"bold"}}>{name}</Text>
+        <Text></Text>    
+      </Pressable>
     </View>
   )
 }
@@ -24,20 +32,66 @@ const Listing = ({name, address}) => {
 
 
 export default function MapPage() {
-  return (
+    [gardens, setGardens] = useState([]);
+    [isLoading, setLoading] = useState(true);
+    [modalVisible, setVisible] = useState(false);
+    [indexOfCurrentGarden, setIndex] = useState(0);
+    const query ="https://data.calgary.ca/resource/kami-qbfh.json?$query=SELECT%0A%20%20%60site_name%60%2C%0A%20%20%60the_geom%60%2C%0A%20%20%60planning_category%60%2C%0A%20%20%60asset_type%60%2C%0A%20%20%60type_description%60%2C%0A%20%20%60minortype%60%2C%0A%20%20%60cultural_landscape%60%2C%0A%20%20%60asset_class%60%2C%0A%20%20%60asset_cd%60%2C%0A%20%20%60location_detail%60%2C%0A%20%20%60steward%60%2C%0A%20%20%60maintained_by%60%2C%0A%20%20%60maint_info%60%2C%0A%20%20%60life_cycle_status%60%0AWHERE%0A%20%20caseless_one_of(%0A%20%20%20%20%60maint_info%60%2C%0A%20%20%20%20%22COMMUNITY%20GARDEN%20IS%20MUNICIPALLY%20APPROVED%20HERITAGE%20SITE%22%0A%20%20)"; 
+
+    //  { gardens.map((g, index) => <Polygon key={index} coordinates={g.the_geom.coordinates[0][0].map((coords) => {coords[0], coords[1]})}/>)}
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await fetch(query, {method:"GET", headers:{'X-App-Token':"btuIRgXPKkPuQmgec7uiwz8IJ"}});
+                const data = await res.json();
+                let arr = [];
+                data.map((g,index) => {
+                    arr[index] = {name:g.site_name, pos:{latitude: g.the_geom.coordinates[0][0][index][1], longitude: g.the_geom.coordinates[0][0][0][0]}}
+                })
+                setGardens(arr);
+                setLoading(false);
+                console.log(arr);
+            }
+            catch (e) {console.log("error")}
+        }
+        fetchData();
+        },[]
+    );
+
+    while (isLoading) return (
+        <View style={{justifyContent:'center'}}>
+            <ActivityIndicator/>
+        </View>
+    )
+
+    return (
     <SafeAreaView style={styles.container}>
-      <View style={{padding:10}}>
-        <Text style={{fontWeight:"600", fontSize:25, color:"brown", marginBottom:10}}>Find gardens near you</Text>
-        <Text style={{fontSize:13, fontWeight:"bold"}}>Check which areas around you might need some help</Text>
-      </View>
-      
-      <MapView initialRegion={calgary}  style={styles.map} provider={PROVIDER_GOOGLE}/>
-      
-      <ScrollView style={styles.scrollContainer}>
-        <Listing name="Garden 1" address="123 Boombaclaat Road SW"/>  
-        <Listing name="Garden 2" address="123 Boombaclaat Road SW"/>  
-        <Listing name="Garden 3" address="123 Boombaclaat Road SW"/>  
-      </ScrollView>
+        <View style={{width:"100%", height:"100%"}}>
+            <View style={{padding:10}}>
+                <Text style={{fontWeight:"600", fontSize:25, color:"brown", marginBottom:10}}>Find gardens near you</Text>
+                <Text style={{fontSize:13, fontWeight:"bold"}}>Check which areas around you might need some help</Text>
+            </View>
+            
+            <MapView initialRegion={calgary}  style={styles.map} provider={PROVIDER_GOOGLE}>
+                {gardens.map((g, index) => <Marker key={index} coordinate={g.pos}/>)}
+            </MapView>
+            
+            <ScrollView style={styles.scrollContainer}>
+                {gardens.map((g, index) => <Listing name={g.name} key={index} />)}
+        
+            </ScrollView>
+        </View>
+        <Modal 
+            visible={modalVisible}
+            animationType="slide"
+    
+        >
+            <SafeAreaView>
+                <Text>Gay</Text>
+            </SafeAreaView>
+            
+
+        </Modal>
     </SafeAreaView>
   );
 }

@@ -3,11 +3,13 @@ import { fontWeight, width } from '@mui/system';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import MapPage from './Pages/MapPage';
+import { Marker } from 'react-native-maps';
 
 export default function App() {
   return (
     <SafeAreaView style={{width:"100%", height:"100%"}}>
-      <MapPage/>
+      <MapPage>
+      </MapPage>
     </SafeAreaView>
   );
 }
