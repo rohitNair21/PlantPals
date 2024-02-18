@@ -17,6 +17,7 @@
     "ios": {
       "supportsTablet": true
     },
+    "ios.config.googleMapsApiKey":"AIzaSyACcad70WsRm7XYy7LT1HoGyP6bknQG8CA",
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
