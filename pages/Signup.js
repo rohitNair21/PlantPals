@@ -24,11 +24,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 
-const Login = () => {
+const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async () => {
+  const handleSignUp = async () => {
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -52,7 +52,18 @@ const Login = () => {
       <Image source={Logo} style={styles.logo} resizeMode="contain" />
       <Text style={styles.maintitle}>PlantPals 🌱</Text>
       <View style={styles.loginBox}>
-        <Text style={styles.title}>Login</Text>
+        <Text style={styles.title}>Sign Up</Text>
+        <Text style={styles.header}>Email</Text>
+        <Input
+          style={styles.input}
+          value={username}
+          onChangeText={setUsername}
+          autoCapitalize="none"
+          inputContainerStyle={styles.inputContainer}
+          inputStyle={styles.input}
+          containerStyle={styles.inputContainerStyle}
+        />
+
         <Text style={styles.header}>Username</Text>
         <Input
           style={styles.input}
@@ -74,15 +85,11 @@ const Login = () => {
           inputStyle={styles.input}
           containerStyle={styles.inputContainerStyle}
         />
-        <TouchableOpacity
-          onPress={() => console.log("Forgot Password pressed")}
-        >
-          <Text style={styles.forgotPassword}>Forgot password?</Text>
-        </TouchableOpacity>
+
         <Button
-          title="Log in"
+          title="Sign Up"
           buttonStyle={styles.loginButton}
-          onPress={handleLogin}
+          onPress={handleSignUp}
         />
         <TouchableOpacity onPress={() => console.log("Sign Up pressed")}>
           <Text style={styles.signUpText}>Don’t have an account? Sign up</Text>
@@ -169,4 +176,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default Signup;
