@@ -2,7 +2,7 @@ import { brown } from '@mui/material/colors';
 import { fontWeight, width } from '@mui/system';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
-import MapPage from './Pages/MapPage';
+import MapPage from './pages/MapPage';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -20,7 +20,7 @@ export default function App() {
         }}
       >
         <Tab.Screen name="Nav" component={Nav} />
-        <Tab.Screen name="Home" component={Nav} />
+        <Tab.Screen name="Home" component={MapPage} />
       </Tab.Navigator>
     </NavigationContainer>
   );
