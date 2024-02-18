@@ -1,9 +1,11 @@
 import { brown } from '@mui/material/colors';
 import { fontWeight } from '@mui/system';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View, Image } from 'react-native';
 import MapView from 'react-native-maps';
 import {PROVIDER_GOOGLE} from 'react-native-maps';
+
+import Logo from "../assets/Logo_Final.png";
 
 const calgary = {
   latitude: 51.0478,
@@ -21,13 +23,24 @@ const Listing = ({name, address}) => {
   )
 }
 
-
-
 export default function MapPage() {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{padding:10}}>
-        <Text style={{fontWeight:"600", fontSize:25, color:"brown", marginBottom:10}}>Find gardens near you</Text>
+      <View style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "left",
+          marginTop: 10,
+          marginBottom: 20
+        }}>
+        <Image source={Logo} style={styles.logo} resizeMode="contain" />
+      </View>
+
+      <View style={{
+          padding:10,
+          justifyContent: "left"
+        }}>
+        <Text style={{fontWeight:"600", fontSize:25, color:"#57442A", marginBottom:10}}>Find gardens near you</Text>
         <Text style={{fontSize:13, fontWeight:"bold"}}>Check which areas around you might need some help</Text>
       </View>
       
@@ -70,6 +83,6 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: "white",
     borderWidth: 2,
-    borderColor: "brown",
+    borderColor: "#42321B",
   },
 });
