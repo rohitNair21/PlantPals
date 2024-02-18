@@ -35,7 +35,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 
-const Login = ({ navigation }) => {
+const Login = ({ navigation, setLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const auth = getAuth();
@@ -49,7 +49,8 @@ const Login = ({ navigation }) => {
       );
       const user = userCredential.user;
       console.log("User logged in:", user.uid);
-      navigation.navigate("Dashboard");
+      setLoggedIn(true);
+      //navigation.navigate("Dashboard");
     } catch (error) {
       // Handle Errors here.
       const errorCode = error.code;
