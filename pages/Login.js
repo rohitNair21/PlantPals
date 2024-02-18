@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import { Input, Button } from "react-native-elements";
-import Logo from "../assets/Logo_1.svg";
-import SvgUri from "react-native-svg-uri";
+import Logo from "../assets/Logo_Final.png";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -11,13 +10,8 @@ const Login = () => {
   return (
     <View style={styles.container}>
       <Image source={Logo} style={styles.logo} resizeMode="contain" />
-      <SvgUri
-        width="200"
-        height="200"
-        source={{
-          uri: "../assets/Logo_1.svg",
-        }}
-      />
+      <Text style={styles.maintitle}>PlantPals 🌱</Text>
+
       <View style={styles.loginBox}>
         <Text style={styles.title}>Login</Text>
         <Text style={styles.header}>Username</Text>
@@ -80,7 +74,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   loginBox: {
-    width: "80%",
+    width: "90%",
     alignItems: "center",
     backgroundColor: "#E1F0C8",
     borderRadius: 20,
@@ -91,6 +85,13 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 10,
+  },
+  maintitle: {
+    fontSize: 36,
+    fontWeight: "bold",
+    marginBottom: 24,
+    color: "#333",
+    alignSelf: "center",
   },
   title: {
     fontSize: 26,
