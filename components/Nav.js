@@ -1,11 +1,16 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 export default function Nav({ state, descriptors, navigation }) {
+
     return(
         <View style={{ flexDirection: "row" }}>
             {state.routes.map((route, index) => {
+                const buttons = ["Dashboard", "Map", "Leaderboard"];
                 const { options } = descriptors[route.key];
                 const label = options.tabBarLabel !== undefined ? options.tabBarLabel : options.title !== undefined ? options.title : route.name;
                 const isFocused = state.index === index;
@@ -29,8 +34,9 @@ export default function Nav({ state, descriptors, navigation }) {
                 });
                 };
 
-                return (
+                return buttons.includes(label) ? (
                     <TouchableOpacity
+                        key={index}
                         accessibilityRole="button"
                         accessibilityState={isFocused ? { selected: true } : {}}
                         accessibilityLabel={options.tabBarAccessibilityLabel}
@@ -56,7 +62,7 @@ export default function Nav({ state, descriptors, navigation }) {
                             </Text>
                         </View>
                     </TouchableOpacity>
-                );
+                ) : (<View style={{ display: "none" }}></View>)
             })}
         </View>
     );
