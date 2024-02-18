@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import MapPage from "./pages/MapPage";
 import Dashboard from "./pages/Dashboard";
 import Leaderboard from "./pages/Leaderboard";
+import Redemption from "./pages/Redemption";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -21,12 +22,14 @@ export default function App() {
       <Tab.Navigator
         initialRouteName="Login"
         screenOptions={{
-          headerShown: false
+          headerShown: false,
         }}
         sceneContainerStyle={{ backgroundColor: "white" }}
         tabBar={(props) => <Nav {...props} />}
       >
         <Tab.Screen name="Login" component={Login} />
+        <Tab.Screen name="Redemption" component={Redemption} />
+
         <Tab.Screen name="Signup" component={SignUp} />
         <Tab.Screen name="Dashboard" component={Dashboard} />
         <Tab.Screen name="Map" component={MapPage} />

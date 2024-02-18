@@ -12,6 +12,7 @@ import Logo from "../assets/Logo_Final.png";
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import leafImage from "../assets/Leaf2Final.png";
+import Redemption from "../pages/Redemption";
 
 import {
   getFirestore,
