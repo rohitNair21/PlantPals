@@ -1,5 +1,8 @@
+import { brown } from '@mui/material/colors';
+import { fontWeight, width } from '@mui/system';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import MapPage from './Pages/MapPage';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -23,11 +26,15 @@ export default function App() {
   );
 }
 
+
+
 const styles = StyleSheet.create({
   container: {
+    margin: 25,
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  
 });
