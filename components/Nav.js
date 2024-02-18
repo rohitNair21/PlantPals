@@ -37,11 +37,16 @@ export default function Nav({ state, descriptors, navigation }) {
                         testID={options.tabBarTestID}
                         onPress={onPress}
                         onLongPress={onLongPress}
-                        style={{ flex: 1 }}
+                        style={{
+                            display: "flex",
+                            flex: 1,
+                            alignItems: "center",
+                            marginBottom: 15
+                        }}
                     >
                         <View style={{
-                            padding: 10,
-                            alignItems: "center",
+                            padding: 5,
+                            alignItems: "center"
                         }}>
                             {label === "Dashboard" && <MaterialIcons name="space-dashboard" size={24} color="black" />}
                             {label === "Map" && <FontAwesome5 name="map-marker-alt" size={24} color="black" />}

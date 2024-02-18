@@ -19,8 +19,9 @@ export default function App() {
       <Tab.Navigator
         initialRouteName='Dashboard'
         screenOptions={{
-          headerShown: false,
+          headerShown: false
         }}
+        sceneContainerStyle={{ backgroundColor: 'white' }}
         tabBar={props => <Nav {...props}/>}
       >
         <Tab.Screen name="Dashboard" component={Dashboard} />
